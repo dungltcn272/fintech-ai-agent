@@ -70,8 +70,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.datastore.core)
+    implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.firebase.appdistribution.gradle)
     implementation(libs.googleid)
     testImplementation(libs.junit)
@@ -110,9 +109,10 @@ dependencies {
     implementation(libs.gson)
 
     // Lottie
-    implementation("com.airbnb.android:lottie-compose:6.6.9")
+    implementation(libs.lottie.compose)
 
-    implementation("com.facebook.android:facebook-android-sdk:18.1.3")
-    implementation("com.facebook.android:facebook-login:16.3.0")
+    // Facebook Login
+    implementation(libs.facebook.android.sdk)
+    implementation(libs.facebook.login)
 
 }

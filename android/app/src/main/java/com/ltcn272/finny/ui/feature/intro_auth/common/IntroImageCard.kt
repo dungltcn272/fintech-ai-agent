@@ -1,6 +1,5 @@
 package com.ltcn272.finny.ui.feature.intro_auth.common
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,10 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,16 +28,21 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun IntroImageCardPreview() {
     IntroImageCard(
-        image = painterResource(id = com.ltcn272.finny.R.drawable.intro_hand),
+        image = androidx.compose.ui.res.painterResource(id = com.ltcn272.finny.R.drawable.intro_2_money),
         modifier = Modifier
             .fillMaxWidth()
-            .height(300.dp)
-            .padding(16.dp),
-        valueText = "Effortless,\nReal-Time Chats",
-        descriptionText = "With lightning-speed response times, it processes queries in real-time, offering clear and concise answers without delays.",
-        icon = painterResource(id = com.ltcn272.finny.R.drawable.ic_arrow_right)
+            .fillMaxHeight(0.6f),
+        cardModifier = Modifier
+            .padding(top = 12.dp, start = 8.dp),
+        cardWidthFraction = 0.55f,
+        cardHeightFraction = 0.35f,
+        valueText = "2",
+        descriptionText = "Seconds to get an answer",
+        icon = androidx.compose.ui.res.painterResource(id = com.ltcn272.finny.R.drawable.ic_arrow_right)
     )
 }
+
+
 
 @Composable
 fun IntroImageCard(
@@ -64,8 +68,6 @@ fun IntroImageCard(
     icon: Painter? = null,
     iconTint: Color = Color.White,
     iconBg: Color = Color(0xFF444444),
-    iconModifier: Modifier = Modifier,
-    iconBoxModifier: Modifier = Modifier,
     iconSize: Dp = 45.dp,
     cardAlign: Alignment = Alignment.TopStart,
     cardWidthFraction: Float = 0.56f,
@@ -87,8 +89,7 @@ fun IntroImageCard(
                 .fillMaxHeight(cardHeightFraction),
             shape = cardShape,
             colors = CardDefaults.cardColors(containerColor = cardColor),
-            elevation = CardDefaults.cardElevation(cardElevation),
-            border = BorderStroke(20.dp, Color.White.copy(alpha = 0.5f))
+            elevation = CardDefaults.cardElevation(cardElevation)
         ) {
             Box(Modifier.fillMaxSize()) {
                 if (valueText != null && descriptionText != null) {
@@ -113,18 +114,27 @@ fun IntroImageCard(
                 }
                 if (icon != null) {
                     Box(
-                        modifier = iconBoxModifier
+                        modifier = Modifier
                             .align(Alignment.BottomEnd)
-                            .padding(16.dp)
+                            .padding(
+                                end = 20.dp,
+                                bottom = 20.dp
+                            )
                             .size(iconSize)
-                            .background(iconBg, shape = CircleShape),
+                            .background(iconBg, shape = CircleShape)
+                            .clip(CircleShape)
+                            .shadow(
+                                elevation = 20.dp,
+                                shape = RoundedCornerShape(28.dp),
+                                ambientColor = Color.Black.copy(alpha = 0.25f),
+                                spotColor = Color.Black.copy(alpha = 0.25f)
+                            ),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
                             painter = icon,
                             contentDescription = null,
-                            tint = iconTint,
-                            modifier = iconModifier
+                            tint = iconTint
                         )
                     }
                 }
